@@ -1,0 +1,26 @@
+package com.developer.storesws;
+
+import java.util.NoSuchElementException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ControllerAdvice
+public class ErrorAdvice {
+	
+	@ExceptionHandler(NoSuchElementException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public @ResponseBody String elementNotFound(NoSuchElementException e) {
+		return "Could not find element! " + e.getMessage();
+	}
+	
+	@ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+	@ResponseStatus(value = HttpStatus.CONFLICT)
+	public @ResponseBody elementNotFound(ObjectOptimisticLockingFailureException e){
+		return "xxx";
+	}
+
+}

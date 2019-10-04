@@ -1,0 +1,72 @@
+package com.developer.storesws.service;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.flywaydb.core.internal.jdbc.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.developer.storesws.model.Store;
+
+@Service
+public class StoreService {
+	@Autowired
+	NamedParameterJdbcTemplate jdbc;
+	
+	public UUID addStore(Store store) throws SQLException {
+		UUID uuid = UUID.randomUUID();
+		String sql = "insert into store (url, uuid, version) value(:url, :uuid, 1)";
+		jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
+				.addValue("uuid", uuid));
+		return uuid;
+		
+	}
+	
+	public Store find(UUID id) {
+		String sql = "select * from store where id = :id";
+		Store store = jdbc.queryForObject(sql, new MapSqlParameterSource("uuid", id), new StoreRowMapper());
+		return Optional.of(store)
+				.orElseThrow(() -> new NoSuchElementException());
+	}
+	
+	public Collection<Store> findAll() {
+		String sql = "select * from store";
+		List<Store> list = jdbc.query(sql, new StoreRowMapper());
+		return list;
+}
+	
+	public Store updateStore(UUID id, Store store) {
+		find(id);
+		String sql = "updat store set url=:url, version = version + 1 where id=:id";
+		int i = jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
+				.addValue("uuid", id));
+		return storeDao.save(store.withUuid(id));
+	}
+
+	public void remove(UUID id) {
+		find(id);
+		storeDao.delete(find(id));
+	}
+}
+
+class StoreRowMapper implements RowMapper<Store>{
+	@Override
+	public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Store store = new Store();
+		store.setUrl(rs.getString("url"));
+		store.setUuid(rs.getObject("uuid", UUID.class));
+		store.setVersion(rs.getInt("version"));
+		return store;
+	}
+}

@@ -1,7 +1,0 @@
-package com.developer.storesws.service;
-
-
-@Service
-public class StoreService {
-
-}

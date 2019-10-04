@@ -1,46 +1,98 @@
 package com.developer.storesws.service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.flywaydb.core.internal.jdbc.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.RestTemplate;
 
-import com.developer.storesws.StoreDao;
 import com.developer.storesws.model.Store;
 
 @Service
+@Transactional
 public class StoreService {
 	@Autowired
-	StoreDao storeDao;
+	NamedParameterJdbcTemplate jdbc;
 	
-	public UUID addStore(Store store) {
-		Store save = storeDao.save(store);
-		return save.getUuid();
+	public UUID addStore(Store store)  {
+		UUID uuid = UUID.randomUUID();
+		String sql = "insert into store (url, uuid, version) values(:url, :uuid, 1)";
+		jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
+				.addValue("uuid", uuid));
+//		System.out.println(TransactionInterceptor.currentTransactionStatus());
+		return uuid;
 		
 	}
 	
 	public Store find(UUID id) {
-		return Optional.of(storeDao.findByUuid(id))
-				.orElseThrow(() -> new NoSuchElementException());
+		String sql = "select * from store where uuid = :uuid";
+		try {
+			return jdbc.queryForObject(sql, new MapSqlParameterSource("uuid", id), new StoreRowMapper());
+		}catch(NoSuchElementException e) {
+			throw new NoSuchElementException();
+		}
 	}
 	
 	public Collection<Store> findAll() {
-		Collection<Store> list = new ArrayList<Store>();
-		storeDao.findAll().forEach(x -> list.add(x));
+		String sql = "select * from store";
+		List<Store> list = jdbc.query(sql, new StoreRowMapper());
 		return list;
 }
 	
 	public Store updateStore(UUID id, Store store) {
 		find(id);
-		return storeDao.save(store.withUuid(id));
+		String sql = "update store set url=:url, version = version + 1 where uuid=:uuid";
+		int i = jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
+				.addValue("uuid", id));
+		if(i!=1) throw new OptimisticLockingFailureException("Stale update detected for " + store.getUuid());
+		return find(id);
 	}
 
 	public void remove(UUID id) {
-		find(id);
-		storeDao.delete(find(id));
+		
+		String sql = "delete from store where uuid = :uuid";
+		
+		int i = jdbc.update(sql, new MapSqlParameterSource("uuid", id));
+		if(i != 1) {
+			throw new NotModifiedDataAccessException("store already gone");
+		};
+	}
+}
+
+class StoreRowMapper implements RowMapper<Store>{
+	@Override
+	public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Store store = new Store();
+		store.setUrl(rs.getString("url"));
+		store.setUuid(rs.getObject("uuid", UUID.class));
+		store.setVersion(rs.getInt("version"));
+		return store;
+	}
+}
+
+@ResponseStatus(value = HttpStatus.NOT_MODIFIED)
+class NotModifiedDataAccessException extends DataAccessException{
+	
+	private static final long serialVersionUID = 1L;
+
+	public NotModifiedDataAccessException(String msg) {
+		super(msg);
 	}
 }

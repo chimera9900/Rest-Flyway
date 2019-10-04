@@ -1,12 +1,9 @@
 package com.developer.storesws.controller;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.BasicLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.developer.storesws.config.StoreResourceAssembler;
 import com.developer.storesws.model.Store;
 import com.developer.storesws.service.StoreService;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping("/store")

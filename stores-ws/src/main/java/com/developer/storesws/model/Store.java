@@ -2,25 +2,13 @@ package com.developer.storesws.model;
 
 import java.util.UUID;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
+
 public class Store {
 	
 	private String url;
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-		name = "UUID",
-		strategy = "org.hibernate.id.UUIDGenerator"
-	)
 	private UUID uuid;
 	private int version;
 	

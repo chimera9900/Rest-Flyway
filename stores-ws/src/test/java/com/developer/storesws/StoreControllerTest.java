@@ -22,6 +22,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.developer.storesws.model.Store;
 import com.developer.storesws.service.StoreService;
@@ -33,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
+@Transactional
 public class StoreControllerTest {
 	@Autowired
 	MockMvc mvc;
