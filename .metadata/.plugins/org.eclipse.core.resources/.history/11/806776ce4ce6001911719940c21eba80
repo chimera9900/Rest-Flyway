@@ -1,0 +1,51 @@
+package com.developer.storesws.service;
+
+import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.developer.storesws.StoreDao;
+import com.developer.storesws.model.Store;
+
+@Service
+public class StoreService {
+	@Autowired
+	StoreDao storeDao;
+	
+	public UUID addStore(Store store) {
+		Store save = storeDao.save(store);
+		return save.getUuid();
+		
+	}
+	
+	public Store find(UUID id) {
+		if(db.containsKey(id))
+			return db.get(id);
+		throw new NoSuchElementException();
+	}
+	
+	public Collection<Store> findAll() {
+		return db.values();
+}
+	
+	public Store updateStore(UUID id, Store store) {
+		if(db.containsKey(id)) {
+			db.put(id, store.withUuid(id));
+			return store.withUuid(id);
+		}
+		throw new NoSuchElementException();
+	}
+
+	public void remove(UUID id) {
+		if(!db.containsKey(id)) {
+			throw new NoSuchElementException();
+		}
+		db.remove(id);		
+	}
+	
+	
+	
+}

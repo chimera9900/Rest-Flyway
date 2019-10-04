@@ -1,0 +1,33 @@
+package com.developer.storesws.controller;
+
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.BasicLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.developer.storesws.model.Store;
+import com.developer.storesws.service.StoreService;
+
+@RestController
+@RequestMapping("/stores")
+public class StoreController {
+	
+	@Autowired
+	StoreService storeService;
+	
+	@GetMapping("/{id}")
+	public Resource<Store> getStore(@PathVariable UUID id) {
+		return new Resource<>(new Store("google.com"));
+	}
+	
+
+}

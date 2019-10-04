@@ -1,0 +1,12 @@
+package com.developer.storesws.service;
+
+import org.springframework.stereotype.Service;
+
+import com.developer.storesws.model.Store;
+
+@Service
+public class StoreService {
+	public void addStore(Store store) {
+		
+	}
+}

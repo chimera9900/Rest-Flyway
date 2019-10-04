@@ -1,0 +1,28 @@
+package com.developer.storesws.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Store {
+	
+	public String url;
+	
+	public Store() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@JsonCreator
+	public Store(@JsonProperty("url") String url) {
+		this.url = url;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+
+}

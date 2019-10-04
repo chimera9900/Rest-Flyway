@@ -1,0 +1,5 @@
+package com.developer.storesws.model;
+
+public class BookmarkController {
+
+}

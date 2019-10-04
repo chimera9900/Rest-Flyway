@@ -1,0 +1,14 @@
+package com.developer.storesws.config;
+
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.ResourceAssembler;
+import org.springframework.stereotype.Component;
+
+import com.developer.storesws.model.Store;
+
+@Component
+public class StoreResourceAssembler implements ResourceAssembler<Store, Resource<Store>> {
+	public Resource<Store> toResource(Store entity) {
+		return new Resource<Store>(entity);
+	};
+}
