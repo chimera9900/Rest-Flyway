@@ -1,0 +1,36 @@
+package com.developer.storesws.ui.controller;
+
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.developer.storesws.model.Store;
+import com.developer.storesws.service.StoreService;
+
+@Controller
+@RequestMapping(value = "/store")
+public class StoreUiController {
+	
+	@Autowired
+	StoreService storeService;
+	
+	@GetMapping(value = "/{uuid}")
+	public String helloWorld(@PathVariable UUID uuid, Model model) {
+		Store store = storeService.find(uuid);
+		model.addAttribute("store", store);
+		return "store/details";
+	}
+	
+	@GetMapping(value = "/{uuid}")
+	public String helloWorld(@PathVariable UUID uuid, Model model) {
+		Store store = storeService.find(uuid);
+		model.addAttribute("store", store);
+		return "store/details";
+	}
+
+}

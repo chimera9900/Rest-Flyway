@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Arrays in Thymeleaf</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/> 
+    </head>
+<body class="container">
+ <h1 class="text-primary">Edit Form</h1>
+ 
+ <form th:object="${store}" th:action="@{/api/store/{id}(id=${store.uuid})}" method="post">
+  <div class="form-group">
+    <label for="url">url</label>
+    <input type="text" class="form-control" id="url" th:value="*{url}" name="url" >
+  </div>
+  <div class="form-group">
+    <label for="description">description</label>
+    <input id="description" type="text" class="form-control" th:value="*{description}" name="description">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="reset" class="btn btn-success">Reset</button>
+</form>
+
+ 
+ <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

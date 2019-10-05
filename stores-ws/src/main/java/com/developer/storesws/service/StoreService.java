@@ -2,6 +2,7 @@ package com.developer.storesws.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,10 +34,14 @@ public class StoreService {
 	
 	public UUID addStore(Store store)  {
 		UUID uuid = UUID.randomUUID();
-		String sql = "insert into store (url, uuid, version) values(:url, :uuid, 1)";
+		String sql = "insert into store (url, uuid, version, description, createOn) values(:url, :uuid, 1, :description, :createOn)";
 		jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
-				.addValue("uuid", uuid));
+				.addValue("uuid", uuid)
+				.addValue("description", store.getDescription())
+				.addValue("createOn", LocalDateTime.now())
+				);
 //		System.out.println(TransactionInterceptor.currentTransactionStatus());
+		System.out.println("http://localhost:8080/store/" + uuid);
 		return uuid;
 		
 	}
@@ -58,9 +63,13 @@ public class StoreService {
 	
 	public Store updateStore(UUID id, Store store) {
 		find(id);
-		String sql = "update store set url=:url, version = version + 1 where uuid=:uuid";
+		String sql = "update store set url=:url, version = version + 1, description=:description, updateOn=:updateOn"
+				+ " where uuid=:uuid";
 		int i = jdbc.update(sql, new MapSqlParameterSource("url", store.getUrl())
-				.addValue("uuid", id));
+				.addValue("uuid", id)
+				.addValue("description", store.getDescription())
+				.addValue("updateOn", LocalDateTime.now())
+				);
 		if(i!=1) throw new OptimisticLockingFailureException("Stale update detected for " + store.getUuid());
 		return find(id);
 	}
@@ -83,6 +92,9 @@ class StoreRowMapper implements RowMapper<Store>{
 		store.setUrl(rs.getString("url"));
 		store.setUuid(rs.getObject("uuid", UUID.class));
 		store.setVersion(rs.getInt("version"));
+		store.setCreateOn(rs.getObject("createOn", LocalDateTime.class));
+		store.setDescription(rs.getString("description"));
+		store.setUpdateOn(rs.getObject("updateOn", LocalDateTime.class));
 		return store;
 	}
 }

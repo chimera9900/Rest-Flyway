@@ -12,5 +12,8 @@ public class StoresWsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StoresWsApplication.class, args);
 	}
+	
+
+
 
 }

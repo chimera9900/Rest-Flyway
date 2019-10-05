@@ -1,0 +1,16 @@
+package com.developer.storesws.ui.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(value = "/store")
+public class StoresUiController {
+	
+	@GetMapping(value = "/{id}")
+	public String helloWorld() {
+		return "test";
+	}
+
+}

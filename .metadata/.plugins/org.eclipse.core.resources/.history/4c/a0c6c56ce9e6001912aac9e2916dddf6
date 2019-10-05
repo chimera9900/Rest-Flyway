@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Arrays in Thymeleaf</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link scr="/bootstrap/4.3.1/css/bootstrap.min.css"> 
+    </head>
+<body>
+ <h1>this is test</h1>
+ 
+ <script type="text/javascript" scr="/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

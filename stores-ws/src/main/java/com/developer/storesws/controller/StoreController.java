@@ -19,7 +19,7 @@ import com.developer.storesws.model.Store;
 import com.developer.storesws.service.StoreService;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping(value = "store", produces = "application/hal+json;charset=UTF-8")
 public class StoreController {
 	
 	@Autowired

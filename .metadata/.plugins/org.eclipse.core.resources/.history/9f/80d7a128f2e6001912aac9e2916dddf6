@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Arrays in Thymeleaf</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/> 
+    </head>
+<body class="container">
+ <h1 class="text-primary">store details</h1>
+ <fieldset>
+ 	<label th:text="${store.description}">store</label>
+ 	<div>
+ 		<a th:href="${store.url}" th:text="${store.url}" >weblink</a>
+ 	</div>
+ 	<div>
+ 		Create on: <span th:text="${store.createOn}" >date</span>
+ 	</div>
+ 	<div>
+ 		Create on: <span th:text="${store.updateOn}" >date</span>
+ 	</div>
+ 
+ </fieldset>
+ 
+ <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
