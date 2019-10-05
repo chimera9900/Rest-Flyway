@@ -1,7 +1,5 @@
 package com.developer.storesws;
 
-import java.util.NoSuchElementException;
-
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;

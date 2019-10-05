@@ -9,8 +9,13 @@
 </head>
 <body class="container">
 	<h1 class="text-primary">a list of store</h1>
+	<p>Welcome <span sec:authentication="name">Bob</span></p>
+	<small>Roles: <span sec:authentication="principal.authorities">roles</span></small>
 
-	<form action="/api/store" method="get">
+	<form th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-primary">logout</button>
+	</form>
+	<form th:action="@{/api/store}" method="get">
 		<button type="submit" class="btn btn-primary">add new store</button>
 	</form>
 	<table class="table">
