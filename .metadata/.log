@@ -3270,3 +3270,15 @@ Binding(CTRL+SHIFT+T,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-04 20:29:32.012
 !MESSAGE executing callback sts4.classpath.KYcJGSZY SUCCESS [done]
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-04 20:50:29.692
+!MESSAGE Scanning for dialect help files on project dependencies
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-04 20:50:29.913
+!MESSAGE Help file found: Standard-Dialect.xml
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-04 20:50:29.915
+!MESSAGE Help file found: Java8Time.xml
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-04 20:50:29.921
+!MESSAGE Scanning complete.  Execution time: 228ms

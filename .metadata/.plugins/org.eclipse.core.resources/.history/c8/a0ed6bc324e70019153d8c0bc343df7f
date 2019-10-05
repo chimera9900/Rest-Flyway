@@ -48,9 +48,6 @@ public class StoreUiController {
 	
 	@PostMapping(value = "/{uuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String updateStore(@PathVariable UUID uuid, @Valid Store store, BindingResult result) {
-		if(result.hasErrors()) {
-			return "store/edit";
-		}
 		storeService.updateStore(uuid, store);
 		return "redirect:/api/stores";
 	}
@@ -64,10 +61,7 @@ public class StoreUiController {
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String saveNewStore(@Valid Store store, BindingResult result) {
-		if(result.hasErrors()) {
-			return "store/edit";
-		}
+	public String saveNewStore(@Valid Store store) {
 		storeService.addStore(store);
 		return "redirect:/api/stores";
 	}

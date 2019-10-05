@@ -23,7 +23,6 @@
   <div class="form-group">
     <label for="description">description</label>
     <input id="description" type="text" class="form-control" th:field="*{description}" name="description">
-    <small th:if="${#fields.hasErrors('description')}"  th:errors="*{description}"  >error</small>
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

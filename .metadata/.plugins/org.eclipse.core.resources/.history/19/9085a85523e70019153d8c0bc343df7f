@@ -18,12 +18,10 @@
   <div class="form-group">
     <label for="url">url</label>
     <input type="text" class="form-control" id="url" th:field="*{url}" name="url" >
-    <small th:if="${#fields.hasErrors('url')}"  th:errors="*{url}"  >error</small>
   </div>
   <div class="form-group">
     <label for="description">description</label>
     <input id="description" type="text" class="form-control" th:field="*{description}" name="description">
-    <small th:if="${#fields.hasErrors('description')}"  th:errors="*{description}"  >error</small>
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

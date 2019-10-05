@@ -65,9 +65,7 @@ public class StoreUiController {
 	
 	@PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String saveNewStore(@Valid Store store, BindingResult result) {
-		if(result.hasErrors()) {
-			return "store/edit";
-		}
+		
 		storeService.addStore(store);
 		return "redirect:/api/stores";
 	}

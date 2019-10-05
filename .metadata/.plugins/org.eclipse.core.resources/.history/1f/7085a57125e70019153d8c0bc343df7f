@@ -20,7 +20,7 @@ public class Store {
 	private String url;
 	private UUID uuid;
 	private int version;
-	@Length(max = 255, min = 5)
+	@Length(max = 255)@NotEmpty
 	private String description;
 	private LocalDateTime createOn;
 	private LocalDateTime updateOn;
