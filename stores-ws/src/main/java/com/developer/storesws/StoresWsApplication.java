@@ -13,7 +13,11 @@ public class StoresWsApplication {
 		SpringApplication.run(StoresWsApplication.class, args);
 	}
 	
+	
+	
 
 
 
 }
+
+

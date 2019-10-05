@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Arrays in Thymeleaf</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body class="container">
+	<h1 class="text-primary">a list of store</h1>
+
+	<form th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-success">add new store</button>
+	</form>
+	<form th:action="@{/api/store}" method="get">
+		<button type="submit" class="btn btn-primary">add new store</button>
+	</form>
+	<table class="table">
+		<tr th:each="store: ${stores}">
+			<td th:text="${storeStat.index + 1}">#</td>
+			<td th:text="${store.description}">desc</td>
+			<td><a th:href="${store.url}" th:text="${store.url}">url</a></td>
+			<td><a th:href="@{/api/store/{id}(id=${store.uuid})}">details</a></td>
+			<td><a
+				th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}">delete</a></td>
+		</tr>
+
+	</table>
+
+
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -9,8 +9,20 @@
 </head>
 <body class="container">
 	<h1 class="text-primary">a list of store</h1>
+   <div>
+	Logged user:
+	<span sec:authentication="name">Bob</span> 
+   </div>
+   <div>
+	Roles:
+	<span sec:authentication="principal.authorities">[ROLE_USER,
+		ROLE_ADMIN]</span>
+   </div>
 
-	<form action="/api/store" method="get">
+	<form th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-success">logout</button>
+	</form>
+	<form th:action="@{/api/store}" method="get">
 		<button type="submit" class="btn btn-primary">add new store</button>
 	</form>
 	<table class="table">
@@ -19,8 +31,7 @@
 			<td th:text="${store.description}">desc</td>
 			<td><a th:href="${store.url}" th:text="${store.url}">url</a></td>
 			<td><a th:href="@{/api/store/{id}(id=${store.uuid})}">details</a></td>
-			<td><a
-				th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}">delete</a></td>
+			<td><a th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}">delete</a></td>
 		</tr>
 
 	</table>
