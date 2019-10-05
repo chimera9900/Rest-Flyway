@@ -40,7 +40,6 @@ public class StoreUiController {
 		return "redirect:/api/stores";
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/{uuid}",params = "edit=true")
 	public String editStore(@PathVariable UUID uuid, Model model, @RequestParam boolean edit) {
 		model.addAttribute("store", storeService.find(uuid));
@@ -49,7 +48,6 @@ public class StoreUiController {
 		return "store/edit";
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/{uuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String updateStore(@PathVariable UUID uuid, @Valid Store store, BindingResult result) {
 		if(result.hasErrors()) {
@@ -60,7 +58,6 @@ public class StoreUiController {
 	}
 	
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	public String newStore(Model model) {
 		model.addAttribute("edit", false);
@@ -68,7 +65,6 @@ public class StoreUiController {
 		return "store/edit";
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String saveNewStore(@Valid Store store, BindingResult result) {
 		if(result.hasErrors()) {

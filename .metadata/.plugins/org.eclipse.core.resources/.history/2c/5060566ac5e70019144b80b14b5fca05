@@ -23,20 +23,16 @@
 	<form th:action="@{/logout}" method="post">
 		<button type="submit" class="btn btn-success">logout</button>
 	</form>
-	<th:block sec:authorize="hasRole('ROLE_ADMIN')">
 	<form th:action="@{/api/store}" method="get">
 		<button type="submit" class="btn btn-primary">add new store</button>
 	</form>
-	</th:block>
 	<table class="table">
 		<tr th:each="store: ${stores}">
 			<td th:text="${storeStat.index + 1}">#</td>
 			<td th:text="${store.description}">desc</td>
 			<td><a th:href="${store.url}" th:text="${store.url}">url</a></td>
 			<td><a th:href="@{/api/store/{id}(id=${store.uuid})}">details</a></td>
-			<th:block  sec:authorize="hasRole('ROLE_ADMIN')">
 			<td><a th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}">delete</a></td>
-			</th:block>
 		</tr>
 
 	</table>

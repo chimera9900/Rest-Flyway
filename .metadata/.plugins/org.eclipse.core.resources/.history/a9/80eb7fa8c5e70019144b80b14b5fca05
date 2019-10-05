@@ -23,16 +23,12 @@
  	<div>
  		<a th:href="@{/api/stores}" >a list of store</a>
  	</div>
-		<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-			<div>
-				<a th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}">delete</a>
-			</div>
-		</th:block>
-		<th:block sec:authorize="hasRole('ROLE_ADMIN')" >
+ 	<div>
+ 		<a th:href="@{/api/store/{uuid}/delete(uuid=${store.uuid})}" >delete</a>
+ 	</div>
  	<div>
  		<a th:href="@{/api/store/{uuid}(uuid=${store.uuid}, edit='true')}" >edit</a>
  	</div>
- 	</th:block>
  	
  
  </fieldset>

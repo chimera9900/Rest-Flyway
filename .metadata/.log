@@ -4094,3 +4094,18 @@ java.lang.reflect.InvocationTargetException
 Caused by: java.lang.ArrayIndexOutOfBoundsException
 Root exception:
 java.lang.ArrayIndexOutOfBoundsException
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-05 15:59:27.939
+!MESSAGE Scanning for dialect help files on project dependencies
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-05 15:59:28.035
+!MESSAGE Help file found: Spring-Security-Dialect.xml
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-05 15:59:28.089
+!MESSAGE Help file found: Java8Time.xml
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-05 15:59:28.093
+!MESSAGE Help file found: Standard-Dialect.xml
+
+!ENTRY org.thymeleaf.extras.eclipse 1 0 2019-10-05 15:59:28.097
+!MESSAGE Scanning complete.  Execution time: 156ms

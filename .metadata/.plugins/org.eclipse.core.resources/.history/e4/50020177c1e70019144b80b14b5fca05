@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Arrays in Thymeleaf</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="/user/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/> 
+    </head>
+<body class="container">
+  <h1>Login page</h1>
+    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <form th:action="@{/login}" method="post">
+      <label for="username">Username</label>:
+      <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+      <label for="password">Password</label>:
+      <input type="password" id="password" name="password" /> <br />
+      <input type="submit" value="Log in" />
+    </form>
+ 
+ <script type="text/javascript" src="/user/webjars/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/user/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
